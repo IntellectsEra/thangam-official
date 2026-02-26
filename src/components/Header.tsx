@@ -25,7 +25,7 @@ const Header = () => {
         <div className="max-w-[1400px] mx-auto px-6 flex items-center justify-between h-10">
           <div className="flex items-center gap-2 text-xs tracking-wider text-muted-foreground">
             <Phone className="w-3 h-3" />
-            <span>+91 98765 43210</span>
+            <span>+91 73393 61125</span>
           </div>
           <div className="flex items-center gap-6">
             <button className="flex items-center gap-1.5 text-xs tracking-wider text-muted-foreground hover:text-foreground transition-colors duration-300">
