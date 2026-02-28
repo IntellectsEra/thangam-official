@@ -67,7 +67,7 @@ const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-10">
           {/* Brand */}
           <div className="col-span-2 md:col-span-4 lg:col-span-1 mb-6 lg:mb-0">
-            {/* <h2 className="text-2xl font-serif tracking-[0.3em] mb-4">Thangam Ceramics</h2> */}
+            {/* <h2 className="text-2xl font-serif tracking-[0.3em] mb-4">Thangam Ceramics Ceramics</h2> */}
             <article className="flex pb-4">
               <img src={Logo} alt="logo" className="w-26 h-22" />
             </article>
@@ -82,7 +82,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-3 h-3" />
-                <span>thangamceramicsofficial@gmail.com</span>
+                <span>Thangam Ceramicsceramicsofficial@gmail.com</span>
               </div>
               <div className="flex items-center gap-2">
                 <MapPin className="w-3 h-3" />
@@ -119,7 +119,7 @@ const Footer = () => {
       <div className="border-t border-primary-foreground/10">
         <div className="max-w-[1400px] mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-[10px] tracking-wider text-primary-foreground/30">
-            © 2026 Thangam Ceramics. All rights reserved.
+            © 2026 Thangam Ceramics Ceramics. All rights reserved.
           </p>
           <p className="text-[10px] tracking-wider text-primary-foreground/30">
             Crafted with precision for architectural excellence.

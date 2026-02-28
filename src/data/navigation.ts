@@ -88,10 +88,10 @@ export const navigationData: NavCategory[] = [
     label: "Outdoor Tiles",
     href: "/products?category=outdoor",
   },
-  // {
-  //   label: "Parking Tiles",
-  //   href: "/products?category=parking",
-  // },
+  {
+    label: "Parking Tiles",
+    href: "/products?category=parking",
+  },
   {
     label: "Ceramic Tiles",
     href: "/products?category=ceramic",
