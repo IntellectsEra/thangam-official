@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Search, Heart, User, Phone, Menu, X, ChevronDown } from "lucide-react";
 import { navigationData, NavCategory } from "@/data/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,6 +9,7 @@ const Header = () => {
   const [activeMega, setActiveMega] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const handleMouseEnter = useCallback((label: string) => {
     setActiveMega(label);
@@ -32,10 +33,15 @@ const Header = () => {
               <Heart className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Wishlist</span>
             </button>
-            <button className="flex items-center gap-1.5 text-xs tracking-wider text-muted-foreground hover:text-foreground transition-colors duration-300">
+
+            <button
+              onClick={() => navigate("/admin/login")}
+              className="flex items-center gap-1.5 text-xs tracking-wider text-muted-foreground hover:text-foreground transition-colors duration-300"
+            >
               <User className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Sign In</span>
             </button>
+
             <button className="flex items-center gap-1.5 text-xs tracking-wider text-muted-foreground hover:text-foreground transition-colors duration-300">
               <Search className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Search</span>
@@ -64,7 +70,10 @@ const Header = () => {
                   <Heart className="w-3.5 h-3.5" />
                   <span className="hidden sm:inline">Wishlist</span>
                 </button>
-                <button className="flex items-center gap-1.5 text-xs tracking-wider text-muted-foreground hover:text-foreground transition-colors duration-300">
+                <button
+                  onClick={() => navigate("/admin/login")}
+                  className="flex items-center gap-1.5 text-xs tracking-wider text-muted-foreground hover:text-foreground transition-colors duration-300"
+                >
                   <User className="w-3.5 h-3.5" />
                   <span className="hidden sm:inline">Sign In</span>
                 </button>
