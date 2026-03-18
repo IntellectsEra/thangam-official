@@ -7,23 +7,33 @@ import Footer from "@/components/Footer";
 import { products } from "@/data/products";
 
 const filterOptions = {
-  Category: ["Floor Tiles", "Wall Tiles", "Imported Tiles"],
-  Size: ["300×300 mm", "600×600 mm", "600×1200 mm", "800×800 mm", "1200×1800 mm", "800×2400 mm"],
-  Color: ["White", "Beige", "Grey", "Brown", "Black", "Blue", "Gold"],
-  Finish: ["Polished", "Matt", "High Gloss", "Wood Textured", "Glazed", "Book Match"],
-  Type: ["Porcelain", "Ceramic", "Vitrified"],
+  Category: [
+    "Floor Tiles",
+    "Bathroom Tiles",
+    "Kitchen Tiles",
+    "Outdoor Tiles",
+    "Bedroom Tiles",
+  ],
+  Size: ["200×1200 mm", "600×600 mm", "600×1200 mm"],
+  Color: ["Beige", "Grey", "Brown", "White", "Cream"],
+  Finish: ["Polished", "Matt", "Anti-Skid", "Wood Textured"],
+  Type: ["Porcelain"],
 };
 
 const Products = () => {
   const [filters, setFilters] = useState<Record<string, string[]>>({});
   const [sortBy, setSortBy] = useState("name");
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
-  const [expandedFilter, setExpandedFilter] = useState<string | null>("Category");
+  const [expandedFilter, setExpandedFilter] = useState<string | null>(
+    "Category",
+  );
 
   const toggleFilter = (key: string, value: string) => {
     setFilters((prev) => {
       const current = prev[key] || [];
-      const next = current.includes(value) ? current.filter((v) => v !== value) : [...current, value];
+      const next = current.includes(value)
+        ? current.filter((v) => v !== value)
+        : [...current, value];
       return { ...prev, [key]: next };
     });
   };
@@ -34,7 +44,7 @@ const Products = () => {
     let result = [...products];
     Object.entries(filters).forEach(([key, values]) => {
       if (values.length > 0) {
-        const k = key.toLowerCase() as keyof typeof products[0];
+        const k = key.toLowerCase() as keyof (typeof products)[0];
         result = result.filter((p) => values.includes(String(p[k])));
       }
     });
@@ -47,11 +57,17 @@ const Products = () => {
       {Object.entries(filterOptions).map(([key, values]) => (
         <div key={key} className="border-b border-border/60">
           <button
-            onClick={() => setExpandedFilter(expandedFilter === key ? null : key)}
+            onClick={() =>
+              setExpandedFilter(expandedFilter === key ? null : key)
+            }
             className="flex items-center justify-between w-full py-4 text-left"
           >
-            <span className="text-[11px] tracking-[0.15em] uppercase text-foreground">{key}</span>
-            <ChevronDown className={`w-3.5 h-3.5 text-muted-foreground transition-transform duration-300 ${expandedFilter === key ? 'rotate-180' : ''}`} />
+            <span className="text-[11px] tracking-[0.15em] uppercase text-foreground">
+              {key}
+            </span>
+            <ChevronDown
+              className={`w-3.5 h-3.5 text-muted-foreground transition-transform duration-300 ${expandedFilter === key ? "rotate-180" : ""}`}
+            />
           </button>
           <AnimatePresence>
             {expandedFilter === key && (
@@ -69,12 +85,20 @@ const Products = () => {
                         key={val}
                         onClick={() => toggleFilter(key, val)}
                         className={`block w-full text-left text-xs py-1 transition-colors duration-200 ${
-                          isActive ? "text-foreground font-medium" : "text-muted-foreground hover:text-foreground"
+                          isActive
+                            ? "text-foreground font-medium"
+                            : "text-muted-foreground hover:text-foreground"
                         }`}
                       >
                         <span className="flex items-center gap-2">
-                          <span className={`w-3 h-3 border ${isActive ? "bg-foreground border-foreground" : "border-border"} transition-colors duration-200 flex items-center justify-center`}>
-                            {isActive && <span className="text-primary-foreground text-[8px]">✓</span>}
+                          <span
+                            className={`w-3 h-3 border ${isActive ? "bg-foreground border-foreground" : "border-border"} transition-colors duration-200 flex items-center justify-center`}
+                          >
+                            {isActive && (
+                              <span className="text-primary-foreground text-[8px]">
+                                ✓
+                              </span>
+                            )}
                           </span>
                           {val}
                         </span>
@@ -97,7 +121,9 @@ const Products = () => {
         {/* Breadcrumb */}
         <div className="max-w-[1400px] mx-auto px-6 py-6">
           <nav className="flex items-center gap-2 text-[10px] tracking-wider text-muted-foreground uppercase">
-            <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
+            <Link to="/" className="hover:text-foreground transition-colors">
+              Home
+            </Link>
             <span>/</span>
             <span className="text-foreground">All Tiles</span>
           </nav>
@@ -105,7 +131,9 @@ const Products = () => {
 
         {/* Page Header */}
         <div className="max-w-[1400px] mx-auto px-6 pb-10">
-          <h1 className="text-3xl lg:text-5xl font-serif text-foreground mb-3">All Tiles</h1>
+          <h1 className="text-3xl lg:text-5xl font-serif text-foreground mb-3">
+            All Tiles
+          </h1>
           <p className="text-sm text-muted-foreground">
             {filtered.length} products curated for extraordinary spaces
           </p>
@@ -117,7 +145,9 @@ const Products = () => {
             <aside className="hidden lg:block w-64 flex-shrink-0">
               <div className="sticky top-[180px]">
                 <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-xs tracking-[0.2em] uppercase text-foreground">Filters</h3>
+                  <h3 className="text-xs tracking-[0.2em] uppercase text-foreground">
+                    Filters
+                  </h3>
                   {activeFilterCount > 0 && (
                     <button
                       onClick={() => setFilters({})}
@@ -148,7 +178,9 @@ const Products = () => {
                   )}
                 </button>
                 <div className="flex items-center gap-3 ml-auto">
-                  <span className="text-[10px] tracking-wider uppercase text-muted-foreground">Sort by</span>
+                  <span className="text-[10px] tracking-wider uppercase text-muted-foreground">
+                    Sort by
+                  </span>
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
@@ -174,7 +206,12 @@ const Products = () => {
                   >
                     <Link to={`/product/${product.id}`} className="block">
                       <div className="relative img-zoom aspect-square bg-muted/30 mb-4">
-                        <img src={product.image} alt={product.name} className="w-full h-full object-cover" loading="lazy" />
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
                         <button
                           className="absolute top-4 right-4 p-2 bg-background/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300"
                           onClick={(e) => e.preventDefault()}
@@ -190,9 +227,13 @@ const Products = () => {
                         <span className="w-px h-2.5 bg-border" />
                         <span>{product.finish}</span>
                       </div>
-                      <p className="text-sm text-foreground font-medium mt-2">{product.price}</p>
+                      {/* <p className="text-sm text-foreground font-medium mt-2">
+                        {product.price}
+                      </p> */}
                     </Link>
-                    <button className="w-full mt-3 btn-luxury-outline text-[10px] py-2.5">Request Quote</button>
+                    <button className="w-full mt-3 btn-luxury-outline text-[10px] py-2.5">
+                      Request Quote
+                    </button>
                   </motion.div>
                 ))}
               </div>
@@ -219,7 +260,9 @@ const Products = () => {
                 className="fixed top-0 left-0 bottom-0 w-80 bg-background z-50 p-6 overflow-y-auto"
               >
                 <div className="flex items-center justify-between mb-8">
-                  <h3 className="text-xs tracking-[0.2em] uppercase">Filters</h3>
+                  <h3 className="text-xs tracking-[0.2em] uppercase">
+                    Filters
+                  </h3>
                   <button onClick={() => setMobileFilterOpen(false)}>
                     <X className="w-5 h-5" />
                   </button>
