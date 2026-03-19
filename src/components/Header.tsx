@@ -1,4 +1,6 @@
 import { useState, useCallback } from "react";
+import { useRef, useEffect } from "react";
+import { ChevronRight } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { Search, Heart, User, Phone, Menu, X, ChevronDown } from "lucide-react";
 import { navigationData, NavCategory } from "@/data/navigation";
@@ -18,6 +20,26 @@ const Header = () => {
   const handleMouseLeave = useCallback(() => {
     setActiveMega(null);
   }, []);
+
+  // Inside your component:
+  const scrollRef = useRef<HTMLUListElement>(null);
+  const [showArrow, setShowArrow] = useState(true);
+
+  // Hide arrow when user has scrolled to the end
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const handleScroll = () => {
+      const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 8;
+      setShowArrow(!atEnd);
+    };
+    el.addEventListener("scroll", handleScroll);
+    return () => el.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollRight = () => {
+    scrollRef.current?.scrollBy({ left: 200, behavior: "smooth" });
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm">
@@ -56,7 +78,7 @@ const Header = () => {
             <article className="flex justify-start pb-6">
               <div className="flex items-center gap-2 text-xs tracking-wider text-muted-foreground">
                 <Phone className="w-3 h-3" />
-                <span>+91 98765 43210</span>
+                <span>+91 73393 61125</span>
               </div>
             </article>
 
@@ -112,26 +134,48 @@ const Header = () => {
         onMouseLeave={handleMouseLeave}
       >
         <div className="max-w-[1400px] mx-auto px-6">
-          <ul className="flex items-center justify-center gap-0">
-            {navigationData.map((item) => (
-              <li
-                key={item.label}
-                className="relative"
-                onMouseEnter={() =>
-                  item.megaMenu
-                    ? handleMouseEnter(item.label)
-                    : setActiveMega(null)
-                }
-              >
-                <Link
-                  to={item.href}
-                  className="block px-4 py-4 text-[11px] tracking-[0.18em] uppercase text-muted-foreground hover:text-foreground transition-colors duration-300 whitespace-nowrap"
+          <div className="relative">
+            {/* Scroll container */}
+            <ul
+              ref={scrollRef}
+              className="flex items-center gap-0 overflow-x-auto scrollbar-thin scroll-smooth"
+            >
+              {navigationData.map((item) => (
+                <li
+                  key={item.label}
+                  className="relative shrink-0"
+                  onMouseEnter={() =>
+                    item.megaMenu
+                      ? handleMouseEnter(item.label)
+                      : setActiveMega(null)
+                  }
                 >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+                  <Link
+                    to={item.href}
+                    className="block px-4 py-4 text-[11px] tracking-[0.18em] uppercase text-muted-foreground hover:text-foreground transition-colors duration-300 whitespace-nowrap"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            {/* Fade + arrow button */}
+            {/* <div
+              className={`pointer-events-none absolute right-0 top-0 h-full w-20 bg-gradient-to-l from-background to-transparent transition-opacity duration-300 ${
+                showArrow ? "opacity-100" : "opacity-0"
+              }`}
+            /> */}
+            {showArrow && (
+              <button
+                onClick={scrollRight}
+                className="absolute right-[-20px] top-[38%] -translate-y-1/2 z-10 flex items-center justify-center w-8 h-8 rounded-full bg-background border border-border/60 shadow-sm text-muted-foreground hover:text-foreground hover:border-border hover:shadow-md transition-all duration-200 animate-bounce-x"
+                aria-label="Scroll for more categories"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Mega Menu Panel */}

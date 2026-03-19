@@ -19,7 +19,7 @@ const HeroSection = () => {
       {/* Content */}
       <div className="relative z-10 h-full flex items-center">
         <div className="max-w-[1400px] mx-auto px-6 w-full">
-          <div className="max-w-2xl pt-32">
+          <div className="pt-32">
             <motion.div
               initial={{ width: 0 }}
               animate={{ width: 48 }}
@@ -32,7 +32,7 @@ const HeroSection = () => {
               transition={{ duration: 0.8, delay: 0.5 }}
               className="text-[11px] tracking-[0.4em] uppercase text-primary-foreground/70 mb-6"
             >
-              Luxury Architectural Surfaces
+              Luxury Tiles Shop in Madurai
             </motion.p>
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
@@ -40,21 +40,21 @@ const HeroSection = () => {
               transition={{ duration: 0.8, delay: 0.7 }}
               className="text-4xl sm:text-5xl lg:text-7xl font-serif text-primary-foreground leading-[1.1] mb-6"
             >
-              Where Surfaces
+              Where Homes Meet
               <br />
-              Become
-              <br />
-              <em className="font-display font-light">Statements.</em>
+              Perfect <em className="font-display font-light">Surfaces.</em>
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.9 }}
-              className="text-sm sm:text-base text-white leading-relaxed mb-10 max-w-lg"
+              className="text-sm sm:text-base text-white leading-relaxed mb-10 max-w-[800px]"
             >
-              Luxury tiles curated for architects, designers, and refined
-              spaces. Each surface tells a story of craftsmanship and timeless
-              elegance.
+              Premium tiles, sanitaryware, and CP fittings curated for modern
+              homes and commercial spaces. At Thangam Ceramics, every product is
+              selected for durability, design excellence, and long-lasting
+              performance making us a trusted destination for quality building
+              materials in Madurai.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
